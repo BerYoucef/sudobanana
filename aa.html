@@ -3,19 +3,16 @@
     <meta charset="UTF-8">
     <link rel="icon" href="favicon.png" type="image/png">
     <meta name="active-link" content="Welcome">
-
-
-
 </head>
 <template id="pageContent">
     <h1>💥 XSS</h1>
-    <p>هجوم يسمح بحقن JavaScript في صفحات الويب 🎯</p>
+    <p>about the auhor</p>
 </template>
 
 <script>
 (async () => {
     // fetch template 
-    const res = await fetch('test_template.html');
+    const res = await fetch('/sudobanana/template.html');
     let template = await res.text();
 
     // import page content into template
