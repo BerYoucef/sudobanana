@@ -4,7 +4,7 @@
     <link rel="icon" href="favicon.png" type="image/png">
 </head>
 <template id="pageContent">
-    <h1>💥 XSS</h1>
+    <h1>💥 About me</h1>
     <p>about the auhor</p>
 </template>
 
@@ -32,21 +32,22 @@
     document.open();
     document.write(final);
     document.close();    
+
+    setTimeout(() => {
+        const activeName = document.querySelector('meta[name="active-link"]')?.content?.trim();
+        if (!activeName) return;
+
+        const links = document.querySelectorAll('#sidebarsug a');
+        links.forEach(link => {
+            const text = link.textContent.trim();
+            if (text === activeName || text.includes(activeName)) {
+                link.classList.add('active');
+            }
+        });
+    }, 200);
 })();
 </script>
-<script>
-setTimeout(() => {
-  const activeName = document.querySelector('meta[name="active-link"]')?.content?.trim();
-  if (!activeName) return;
 
-  const links = document.querySelectorAll('#sidebarsug a');
-  links.forEach(link => {
-    if (text.includes(activeName)) {
-      link.classList.add('active');
-    }
-  });
-}, 500);
-</script>
 
 
 
