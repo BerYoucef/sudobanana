@@ -39,7 +39,7 @@ setTimeout(() => {
 
   const links = document.querySelectorAll('#sidebarsug a');
   links.forEach(link => {
-    if (link.textContent.trim() === activeName) {
+    if (text.includes(activeName)) {
       link.classList.add('active');
     }
   });
