@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="favicon.png" type="image/png">
-    <meta name="active-link" content="Welcome">
+    <meta name="active-link" content="About the Author">
 </head>
 <template id="pageContent">
     <h1>💥 XSS</h1>
@@ -40,10 +40,10 @@ setTimeout(() => {
   const links = document.querySelectorAll('#sidebarsug a');
   links.forEach(link => {
     if (link.textContent.trim() === activeName) {
-      link.classList.add('active'); // ✅ هنا فقط نضيف الكلاس "active"
+      link.classList.add('active');
     }
   });
-}, 100);
+}, 300);
 </script>
 
 
