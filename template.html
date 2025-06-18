@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{TITLE}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://beryoucef.github.io/sudobanana/styles/style.css">
+    <script src="https://beryoucef.github.io/sudobanana/scripts/dark-white.js"></script>
+
+</head>
+<body>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RP1WV2K3MF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-RP1WV2K3MF');
+    </script>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-tagline">
+                <a href="https://beryoucef.github.io/sudobanana/" class="logo">
+                    🍌 SudoBanana
+                </a>
+                <p class="tagline">Notes That Refused to Stay on Paper</p>
+            </div>
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchBox" autocomplete="off" placeholder="Search the banana repository...">
+                <div class="search-icon">🔍</div>
+                <!-- search suggestion-->
+                <div id="suggestions" class="suggestion-box"></div>
+            </div>
+            <nav class="user-menu">
+                <a href="https://x.com/SudoBanana7" class="nav-link">X(twitter)</a>
+                <a href="#" class="nav-link" hidden>Youtube</a>
+                <a href="#" class="nav-link">Updates</a>
+                <a href="#" class="nav-link">Random Article</a>
+                
+            </nav>
+        </div>
+    </header>
+        
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside id="sidebar_" class="sidebar"></aside>
+        <script src="https://beryoucef.github.io/sudobanana/scripts/fetch_sidebar-search_suggest.js"></script> 
+        
+        <!-- dark/white theme -->
+        <button class="theme-toggle" id="themeToggle"  onclick="toggleTheme()">
+            <span id="bananaIcon">🍌</span>
+        </button>
+        <!-- Main Content -->
+        <main class="content">
+            <div class="page-content"></div> 
+        </main>
+    </div>
+</body>
+</html>
