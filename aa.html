@@ -18,8 +18,11 @@
     // import page content into template
     const content = document.getElementById('pageContent').innerHTML;
 
-    const myTitle = "XSS Attack Explained 🔐";
-    template = template.replace('{{TITLE}}', myTitle);
+    const myTitle = "About The Author | SudoBanana";
+    const active = "About the Author"
+    template = template
+        .replace('{{TITLE}}', myTitle)
+        .replace('{{ACTIVE_LINK}}', active);
 
     // replace empty page content with real content
     const final = template.replace(
@@ -43,7 +46,7 @@ setTimeout(() => {
       link.classList.add('active');
     }
   });
-}, 300);
+}, 500);
 </script>
 
 
