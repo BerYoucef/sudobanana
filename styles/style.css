@@ -200,6 +200,7 @@ body.light-theme .nav-link:hover {
     border-right: 1px solid var(--medium-gray);
     max-height: 100vh;
     overflow-y: auto;
+    padding-bottom: 50px;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -257,6 +258,7 @@ body.light-theme .nav-link:hover {
 
 body.light-theme .sidebar {
     background-color: var(--white);
+    padding-bottom: 50px;
 }
 
 body.light-theme .sidebar-title {
