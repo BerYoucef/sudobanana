@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/sudobanana/imgs/favicon.png" type="image/png">
+</head>
+<template id="pageContent">
+    <h1  class="page-title ">🤝 Contribute</h1>
+    <div class="content-text">Help make the banana stronger. One line, one idea, one fix at a time. 🍌🛠️</div>
+
+    <h2 class="section-header">🛠️👋 Why Contribute?  </h2>
+    <div class="content-text"> 
+        SudoBanana started as a personal project — but good ideas grow faster when others jump in. <br>
+        Whether you want to fix a typo, suggest a topic, or write an entire article,<br>
+        this section explains how to do it properly.<br>
+    </div>
+    
+    <h2 class="section-header" >🧠 What Can You Contribute?</h2>
+    <div class="content-text" >
+        You don’t need to be an expert. You can contribute by: <br>
+        ✍️ Writing or improving content (even clarifying a sentence).<br>
+        🐛 Fixing mistakes (typos, grammar, formatting).<br>
+        🧪 Suggesting topics to cover.<br>
+        🎨 Helping with design, visuals, or icons.<br>
+        🛠️ Sharing scripts/tools (if useful and aligned with the project).<br>
+        🌐 Translating content (in future plans).<br>
+        Every small contribution matters.<br>
+    </div>
+
+    <h2 class="section-header" >🛠️ How to Contribute?</h2>
+    <div class="content-text" >
+        Here’s the clean way to help out:<br>
+        1• Fork the GitHub repo.<br>
+        2• Create a new branch with a clear name (e.g. fix/xss-typo, add/csrf-summary).<br>
+        3• Make your edits or additions ✍️.<br>
+        4• Open a Pull Request.<br>
+        5• Add a short description explaining what you changed.<br>
+        I’ll review and respond as quickly as possible.<br>
+        GitHub Repo: <a href="https://github.com/BerYoucef/sudobanana">https://github.com/BerYoucef/sudobanana</a><br>
+    </div>
+
+    <h2 class="section-header" >📌 Guidelines</h2>
+    <div class="content-text">
+        Before contributing:<br>
+        🧾 Please read the style guide (📝 <a href="https://beryoucef.github.io/sudobanana/sguide.html">Style Guide</a>).<br>
+        🧩 Don't copy/paste external content (keep it original ❤️‍🔥).<br>
+        🧠 Be accurate, especially in technical parts.<br>
+        💬 Stay within the tone of the project — clear, simple, and curious.<br>
+    </div>
+
+    <h2 class="section-header" >💡 Not a GitHub person?</h2>
+    <div class="content-text">
+        No worries. You can send feedback or ideas through:
+        • A form (coming soon) 👀
+        • Email : SudoBanana7@gmail.com
+        • Discord (if launched) 👊
+        Or just contact me in <a href="https://x.com/SudoBanana7">X</a> .
+    </div>
+        
+    <h2 class="section-header"></h2> 
+    <div class="content-text">
+        Let this be a place shaped by many hands. Every banana counts. 🍌✋
+    </div>
+
+</template>
+
+<script>
+(async () => {
+    // fetch template 
+    const res = await fetch('/sudobanana/template.html');
+    let template = await res.text();
+
+    // import page content into template
+    const content = document.getElementById('pageContent').innerHTML;
+
+    const myTitle = "Contribute | SudoBanana";
+    const active = "Contribute"
+    template = template
+        .replace('{{TITLE}}', myTitle)
+        .replace('{{ACTIVE_LINK}}', active);
+
+    // replace empty page content with real content
+    const final = template.replace(
+        '<div class="page-content"></div>',
+        `<div class="page-content">${content}</div>`
+    );
+    
+    document.open();
+    document.write(final);
+    document.close();    
+
+    setTimeout(() => {
+        const activeName = document.querySelector('meta[name="active-link"]')?.content?.trim();
+        if (!activeName) return;
+
+        const links = document.querySelectorAll('#sidebarsug a');
+        links.forEach(link => {
+            const text = link.textContent.trim();
+            if (text === activeName || text.includes(activeName)) {
+                link.classList.add('active');
+            }
+        });
+    }, 2000);
+})();
+</script>
