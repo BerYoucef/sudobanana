@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/sudobanana/imgs/favicon.png" type="image/png">
+</head>
+<template id="pageContent">
+    <h1  class="page-title ">📜 Philosophy</h1>
+    <div class="content-text">Behind every banana... there's a reason. 🍌🧠</div>
+
+    <h2 class="section-header">🧠 Why this format?</h2>
+    <div class="content-text"> 
+        Because most technical content is hard to digest. <br>
+        Too formal. Too cold. Too heavy.<br>
+        It feels like you’re reading for a certificate — not for understanding.<br>
+        SudoBanana flips that.<br>
+        We believe you can:<br>
+        ~ Learn deeply<br>
+        ~ Think clearly<br>
+        ~ Enjoy the process<br>
+        ... all at the same time.<br>
+        We use visual elements✍️, clean structure, light tone, and just enough weirdness to make it stick.<br>
+    </div>
+    
+    
+    <h2 class="section-header" >🎨 Why emojis?</h2>
+    <div class="content-text" >
+        ~ Because the brain <span class="tooltip" data-tooltip="The brain processes images 60,000 times faster than text 💥👁️"><strong>remembers visuals</strong></span>faster than raw text. <br>
+        ~ Becuase Colors guide your eyes and brain to prioritize and connect. <br>
+        ~ Because learning isn’t just input — it’s feeling. <br>
+        We don’t add emojis to be cute. We add them to create flow, rhythm, and structure. <br>
+    </div>
+
+    <h2 class="section-header" >🗣 Why casual tone?</h2>
+    <div class="content-text">
+        Because we want you to feel like you’re reading from a friend. <br>
+        ~ Not an academic monologue 🥱. <br>
+        ~ Not a PDF from a university server 🫠. <br>
+        ~ Not a cold textbook (Probably you'll throw it over the window). <br>
+        The goal is to make the sentence easier to understand — not bigger than it needs to be 👍. <br>
+    </div>
+
+    <h2 class="section-header" >📚 Why it’s not “complete”?</h2>
+    <div class="content-text" >
+        Because real learning is never finished. <br>
+        This wiki is built by someone who’s still learning — just like you ✌️. <br>
+        So instead of waiting until everything is “perfect”, we ship it raw. Incomplete. But honest. <br>
+        And that’s enough. Because progress matters more than polish 🫡. <br>
+    </div>
+
+    <h2 class="section-header" >⚡️ What this isn’t:</h2>
+    <div class="content-text">
+        ~ It’s not a traditional wiki <br>
+        ~ It’s not a replacement for official docs <br>
+        ~ It’s not afraid to say: “I’m still learning this” <br>
+        This is a space for people who think deeply,<br>
+        but don’t take themselves too seriously. <br>
+    </div>
+        
+    <h2 class="section-header"></h2> 
+    <div class="content-text"><b>We don’t simplify to dumb things down. We simplify to make them real.</b></div>
+</template>
+
+<script>
+(async () => {
+    // fetch template 
+    const res = await fetch('/sudobanana/template.html');
+    let template = await res.text();
+
+    // import page content into template
+    const content = document.getElementById('pageContent').innerHTML;
+
+    const myTitle = "Philosophy| SudoBanana";
+    const active = "Philosophy"
+    template = template
+        .replace('{{TITLE}}', myTitle)
+        .replace('{{ACTIVE_LINK}}', active);
+
+    // replace empty page content with real content
+    const final = template.replace(
+        '<div class="page-content"></div>',
+        `<div class="page-content">${content}</div>`
+    );
+    
+    document.open();
+    document.write(final);
+    document.close();    
+
+    setTimeout(() => {
+        const activeName = document.querySelector('meta[name="active-link"]')?.content?.trim();
+        if (!activeName) return;
+
+        const links = document.querySelectorAll('#sidebarsug a');
+        links.forEach(link => {
+            const text = link.textContent.trim();
+            if (text === activeName || text.includes(activeName)) {
+                link.classList.add('active');
+            }
+        });
+    }, 2000);
+})();
+</script>
