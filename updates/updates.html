@@ -1,166 +1,84 @@
+
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="/sudobanana/imgs/favicon.png" type="image/png">
 </head>
 <template id="pageContent">
-    <h1 class="page-title">📢 Updates</h1>
+    <h1  class="page-title ">📢 Updates</h1>
     <div class="content-text">Latest changes, fresh content, and occasional banana drops 🍌</div>
 
-    <h5 class="section-header">Thu Jun 19 2025 5 AM</h5>
+
+    <h5 class="section-header">Thu Jun 19 2025 5 AM </h5>
     <div class="content-text"> 
         ~ Added Roadmap Page. <br>
         ~ Added Philosophy Page. <br>
         ~ Added Updates Page. <br>
     </div>
 
-    <h5 class="section-header">Wed Jun 18 2025 20 PM</h5>
+
+    <h5 class="section-header">Wed Jun 18 2025 20 PM </h5>
     <div class="content-text"> 
         ~ Added Welcome Page. <br>
         ~ Added About The Author Page. <br>
-        ~ Added How to use the wiki Page. <br>
+        ~ Added How to use the wiki Page.      <br>
     </div>
 
-    <h5 class="section-header">Tue Jun 17 2025 10 AM</h5>
+
+    <h5 class="section-header">Tue Jun 17 2025 10 AM </h5>
     <div class="content-text"> 
-        ~ Just Started the Journey ...📢 😎. <br>
+        ~ Just Started the Journey ...📢 😎.  <br>
     </div>
+
 </template>
 
 <script>
-// Define the function before using it
-function adjustLinkPaths() {
-    const currentPath = window.location.pathname;
-    const currentDir = currentPath.substring(0, currentPath.lastIndexOf('/'));
-    
-    // Handle GitHub Pages paths
-    const basePath = '/sudobanana';
-    const relativePath = currentPath.replace(basePath, '') || '/';
-    
-    const links = document.querySelectorAll('a[href]');
-    
-    console.log(`🔍 Current path: ${currentPath}`);
-    console.log(`📁 Current dir: ${currentDir}`);
-    console.log(`🔗 Relative path: ${relativePath}`);
-    
-    links.forEach(link => {
-        const href = link.getAttribute('href');
-        
-        // Ignore external, special, and already adjusted links
-        if (!href || 
-            href.startsWith('http') || 
-            href.startsWith('//') || 
-            href.startsWith('#') || 
-            href.startsWith('mailto:') || 
-            href.startsWith('tel:') ||
-            href.includes('../') ||
-            link.hasAttribute('data-adjusted')) { // Check for already adjusted links
-            return;
-        }
-        
-        // Handle absolute links that start with /sudobanana
-        if (href.startsWith('/sudobanana/')) {
-            const linkWithoutBase = href.replace('/sudobanana/', '');
-            const linkParts = linkWithoutBase.split('/').filter(part => part !== '');
-            
-            if (linkParts.length === 0) return;
-            
-            const linkFirstDir = linkParts[0];
-            const currentDirParts = relativePath.split('/').filter(part => part !== '');
-            const currentDirName = currentDirParts[currentDirParts.length - 1];
-            
-            // If the folder is different and not the same current page
-            if (linkFirstDir !== currentDirName && currentDirName && linkWithoutBase !== relativePath.substring(1)) {
-                const newHref = '../' + linkWithoutBase;
-                link.setAttribute('href', newHref);
-                link.setAttribute('data-adjusted', 'true'); // Mark as adjusted
-                console.log(`✅ Modified: ${href} → ${newHref}`);
-            }
-            // If it's the same page, don't modify the link
-            else if (linkWithoutBase === relativePath.substring(1)) {
-                console.log(`🔄 Same page link, skipping: ${href}`);
-            }
-        }
-        // Handle regular absolute links starting with /
-        else if (href.startsWith('/')) {
-            const linkParts = href.split('/').filter(part => part !== '');
-            if (linkParts.length === 0) return;
-            
-            const linkFirstDir = linkParts[0];
-            const currentDirParts = currentDir.split('/').filter(part => part !== '');
-            const currentDirName = currentDirParts[currentDirParts.length - 1];
-            
-            if (linkFirstDir !== currentDirName && currentDirName) {
-                const newHref = '../' + href.substring(1);
-                link.setAttribute('href', newHref);
-                link.setAttribute('data-adjusted', 'true'); // Mark as adjusted
-                console.log(`✅ Modified: ${href} → ${newHref}`);
-            }
-        }
-        // Handle simple relative links
-        else if (!href.startsWith('./') && !href.includes('/')) {
-            const currentDirParts = currentDir.split('/').filter(part => part !== '');
-            const currentDirName = currentDirParts[currentDirParts.length - 1];
-            
-            if (currentDirName) {
-                const newHref = '../' + href;
-                link.setAttribute('href', newHref);
-                link.setAttribute('data-adjusted', 'true'); // Mark as adjusted
-                console.log(`✅ Modified relative: ${href} → ${newHref}`);
-            }
-        }
-    });
-}
-
 (async () => {
-    try {
-        // Fetch template 
-        const res = await fetch('/sudobanana/template.html');
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        
-        let template = await res.text();
+    // fetch template 
+    const res = await fetch('/sudobanana/template.html');
+    let template = await res.text();
 
-        // Import page content into template
-        const content = document.getElementById('pageContent').innerHTML;
+    // import page content into template
+    const content = document.getElementById('pageContent').innerHTML;
 
-        const myTitle = "Updates | SudoBanana";
-        const active = "Updates";
-        
-        template = template
-            .replace('{{TITLE}}', myTitle)
-            .replace('{{ACTIVE_LINK}}', active);
+    const myTitle = "Updates | SudoBanana";
+    const active = "Updates"
+    template = template
+        .replace('{{TITLE}}', myTitle)
+        .replace('{{ACTIVE_LINK}}', active);
 
-        // Replace empty page content with real content
-        const final = template.replace(
-            '<div class="page-content"></div>',
-            `<div class="page-content">${content}</div>`
-        );
-        
-        document.open();
-        document.write(final);
-        document.close();    
-        
-        // Delay to ensure content is loaded
-        setTimeout(() => {
-            // Manage active links
-            const activeName = document.querySelector('meta[name="active-link"]')?.content?.trim();
-            if (activeName) {
-                const links = document.querySelectorAll('#sidebarsug a');
-                links.forEach(link => {
-                    const text = link.textContent.trim();
-                    if (text === activeName || text.includes(activeName)) {
-                        link.classList.add('active');
-                    }
-                });
+    // replace empty page content with real content
+    const final = template.replace(
+        '<div class="page-content"></div>',
+        `<div class="page-content">${content}</div>`
+    );
+    
+    document.getElementById("app").innerHTML = final;    
+
+    setTimeout(() => {
+        const currentPath = window.location.pathname;
+
+    document.querySelectorAll("a[href]").forEach(link => {
+        const href = link.getAttribute("href");
+
+      // if path dont have current folder name add ../
+            if (!currentPath.includes(href)) {
+                link.setAttribute("href", "../" + href);
             }
-            
-            // Adjust link paths
-            adjustLinkPaths();
-            
-        }, 2000);
-        
-    } catch (error) {
-        console.error('❌ Error loading template:', error);
-    }
+        });
+    }, 500);
+    
+    setTimeout(() => {
+        const activeName = document.querySelector('meta[name="active-link"]')?.content?.trim();
+        if (!activeName) return;
+
+        const links = document.querySelectorAll('#sidebarsug a');
+        links.forEach(link => {
+            const text = link.textContent.trim();
+            if (text === activeName || text.includes(activeName)) {
+                link.classList.add('active');
+            }
+        });
+    }, 2000);
 })();
 </script>
