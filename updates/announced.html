@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/sudobanana/imgs/favicon.png" type="image/png">
+</head>
+<template id="pageContent">
+    <h1  class="page-title ">📢 Announcements</h1>
+    <div class="content-text">Everything outside the 🍌 — updates, releases, and appearances.</div>
+
+    <h2 class="section-header"> </h2> 
+    
+</template>
+
+<script>
+(async () => {
+    // fetch template 
+    const res = await fetch('/sudobanana/template.html');
+    let template = await res.text();
+
+    // import page content into template
+    const content = document.getElementById('pageContent').innerHTML;
+
+    const myTitle = "Announced | SudoBanana";
+    
+    template = template
+        .replace('{{TITLE}}', myTitle);
+
+    // replace empty page content with real content
+    const final = template.replace(
+        '<div class="page-content"></div>',
+        `<div class="page-content">${content}</div>`
+    );
+    
+    document.open();
+    document.write(final);
+    document.close();    
+
+    
+})();
+</script>
