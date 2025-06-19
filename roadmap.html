@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/sudobanana/imgs/favicon.png" type="image/png">
+</head>
+<template id="pageContent">
+    <h1  class="page-title ">🚧 Roadmap</h1>
+    <div class="content-text">What’s built, what’s coming, and what’s still a sticky note. 🍌🗒️</div>
+
+    <h2 class="section-header">✅ What’s Already Done</h2>
+    <div class="content-text"> 
+        ==> <strong>Thu Jun 19 2025 5:50:50 AM</strong>
+        ~ Built the core structure of the wiki 🧱.
+        ~ A sidebar that actually makes sense 😎.
+        ~ A consistent tone: simple, clear, slightly weird 🍌.
+        ~ A foundation — but just the beginning.
+    </div>
+    
+    <h2 class="section-header" >🛠️ Currently Working On:</h2>
+    <div class="content-text" >
+        ~ a section for Programming Languages.
+        ~ a section for Networking.
+        ~ internal search engine improvements 🔍.
+        ~ a contribution guide for open-source collaborators.
+        ~ Writing core vulnerability pages (XSS, CSRF, SSRF, etc.).
+
+    </div>
+
+    <h2 class="section-header" >🔭 What’s Planned (Soon™)</h2>
+    <div class="content-text" >
+        ~ Add visual flow diagrams for each vulnerability  🌱.
+        ~ Launch the “Banana Notes” PDF series  📘.
+        ~ Build interactive labs (client-side + server-side bugs)  💻.
+        ~ Start a video or voice-based series for visual learners  🎙️.
+        ~ Introduce “Banana Levels” to track reader progress 🍌.
+
+    </div>
+
+    <h2 class="section-header" >🌀 Long-Term Vision</h2>
+    <div class="content-text">
+        ~ Grow a small but loyal cybersecurity community 💛. 
+        ~ Let others contribute tutorials, ideas, or tools 🤝. 
+        ~ Become a go-to reference for web security learners 🚀. 
+        ~ Explore building an actual security training platform 🛡🗡.
+        ~ weird name, serious purpose 👊.
+        ~ Stats dashboard for wiki growth + usage 📊.
+        ~ Personalized learning paths based on skill level🧠.
+        ~ Multilingual support (starting with Arabic 🇩🇿) 🌐.
+        ~ Live sessions or Q&A streams 🧑‍🏫.
+    </div>
+
+    <h2 class="section-header" >🗓️ How often does this update?</h2>
+    <div class="content-text">
+        There’s no strict schedule.
+        New things arrive when they’re ready — and when they’re actually worth adding.
+        (Just like a farmer who waits all year to grow the right bananas 🍌.)
+        It’s quality over quantity. Always 👍❤️‍🔥.
+    </div>
+        
+    <h2 class="section-header" >👀 Want to help?</h2>
+    <div class="content-text" >
+        Check the <strong><a href="/sudobanana/contribute.html">Contribute</a></strong> page ... <br>
+        or just share the site with someone who needs it.<br>
+        <br>
+        Either way,<br>
+        thanks for being here.<br>
+    </div>
+
+    <h2 class="section-header"></h2> 
+    <div class="content-text">
+        Got a cool idea? <br>
+        Open an issue on GitHub or send a banana through a TCP Connetion. 🍌😂.
+    </div>
+
+</template>
+
+<script>
+(async () => {
+    // fetch template 
+    const res = await fetch('/sudobanana/template.html');
+    let template = await res.text();
+
+    // import page content into template
+    const content = document.getElementById('pageContent').innerHTML;
+
+    const myTitle = "Roadmap | SudoBanana";
+    const active = "Roadmap"
+    template = template
+        .replace('{{TITLE}}', myTitle)
+        .replace('{{ACTIVE_LINK}}', active);
+
+    // replace empty page content with real content
+    const final = template.replace(
+        '<div class="page-content"></div>',
+        `<div class="page-content">${content}</div>`
+    );
+    
+    document.open();
+    document.write(final);
+    document.close();    
+
+    setTimeout(() => {
+        const activeName = document.querySelector('meta[name="active-link"]')?.content?.trim();
+        if (!activeName) return;
+
+        const links = document.querySelectorAll('#sidebarsug a');
+        links.forEach(link => {
+            const text = link.textContent.trim();
+            if (text === activeName || text.includes(activeName)) {
+                link.classList.add('active');
+            }
+        });
+    }, 2000);
+})();
+</script>
