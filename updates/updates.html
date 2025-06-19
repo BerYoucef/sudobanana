@@ -70,25 +70,13 @@
     }, 2000);
 })();
 </script>
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    // if the page inside a folder (not in the root folder)
-    const depth = window.location.pathname.split("/").length - 2;
-    if (depth > 0) {
-      document.querySelectorAll("a[href]").forEach(link => {
-        const href = link.getAttribute("href");
-        
-       // ignore external paths 
-        if (
-          !href.startsWith("http") &&
-          !href.startsWith("/") &&
-          !href.startsWith("../") &&
-          !href.startsWith("#")
-        ) {
-          link.setAttribute("href", "../" + href);
-        }
-      });
-    }
+    document.querySelectorAll("a").forEach(link => {
+      const href = link.getAttribute("href");
+      link.setAttribute("href", "../" + href);
+    });
   });
 </script>
 
