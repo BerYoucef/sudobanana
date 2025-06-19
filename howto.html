@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/sudobanana/imgs/favicon.png" type="image/png">
+</head>
+<template id="pageContent">
+    <h1  class="page-title ">📚 How to Use the Wiki</h1>
+    <div class="content-text">This isn’t your average doc site — here’s how to make the most of it. 🚀</div>
+
+    <h2 class="section-header">🧭 Navigation</h2>
+    <div class="content-text"> 
+        📂 Use the sidebar to explore categories (Vulnerabilities, Tools, Concepts, 
+        SudoBanana Pages, and more...). <br>
+        🔍 Use the search bar if you're looking for something specific. <br>
+        🌱 New pages are added frequently — so check the <strong><a href="/sudobanana/updates/updates.html">updates</a></strong> from the header 🙃<br>
+    </div>
+    
+    <h2 class="section-header" >🧠 Page Format</h2>
+    <div class="content-text" >
+        Most pages follow a consistent, simple structure:
+        🔹 <strong>Overview:</strong> What is this thing, and why does it matter?<br>
+        🔧 <strong>Technical Breakdown:</strong> How it works, with real-world context.<br>
+        🧪 <strong>Examples or Diagrams:</strong> Visuals or payloads where possible.<br>
+        🔐 <strong>Key Takeaways:</strong> What to remember, and what to explore next.<br>
+        🔦 <strong>and more ...</strong><br>
+    </div>
+
+    <h2 class="section-header" >📚 Why it’s not “complete”?</h2>
+    <div class="content-text" >
+        Because real learning is never finished. <br>
+        This wiki is built by someone who’s still learning — just like you ✌️. <br>
+        So instead of waiting until everything is “perfect”, we ship it raw. Incomplete. But honest. <br>
+        And that’s enough. Because progress matters more than polish 🫡. <br>
+    </div>
+
+    <h2 class="section-header" >🤝 This Wiki is Alive</h2>
+    <div class="content-text">
+        This isn't a static site. It's a growing documentation of learning, written as
+        things are discovered, tested, broken, and rebuilt. <br>
+        It's okay if things aren't "complete." <br>
+        What matters is that they're <strong>honest and evolving</strong>. <br>
+    </div>
+
+    <h2 class="section-header" >⚡️ What this isn’t:</h2>
+    <div class="content-text">
+        ~ It’s not a traditional wiki <br>
+        ~ It’s not a replacement for official docs <br>
+        ~ It’s not afraid to say: “I’m still learning this” <br>
+        This is a space for people who think deeply,<br>
+        but don’t take themselves too seriously. <br>
+    </div>
+        
+    <h2 class="section-header"></h2> 
+    <div class="content-text">
+        <b>Explore freely. Click curiously. Think deeply.</b>
+        And if you find a typo? Well... congrats, you’re now a contributor 🍌✅
+    </div>
+
+</template>
+
+<script>
+(async () => {
+    // fetch template 
+    const res = await fetch('/sudobanana/template.html');
+    let template = await res.text();
+
+    // import page content into template
+    const content = document.getElementById('pageContent').innerHTML;
+
+    const myTitle = "How To Use | SudoBanana";
+    const active = "How to Use the Wiki"
+    template = template
+        .replace('{{TITLE}}', myTitle)
+        .replace('{{ACTIVE_LINK}}', active);
+
+    // replace empty page content with real content
+    const final = template.replace(
+        '<div class="page-content"></div>',
+        `<div class="page-content">${content}</div>`
+    );
+    
+    document.open();
+    document.write(final);
+    document.close();    
+
+    setTimeout(() => {
+        const activeName = document.querySelector('meta[name="active-link"]')?.content?.trim();
+        if (!activeName) return;
+
+        const links = document.querySelectorAll('#sidebarsug a');
+        links.forEach(link => {
+            const text = link.textContent.trim();
+            if (text === activeName || text.includes(activeName)) {
+                link.classList.add('active');
+            }
+        });
+    }, 2000);
+})();
+</script>
