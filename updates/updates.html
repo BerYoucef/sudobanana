@@ -52,20 +52,20 @@
         `<div class="page-content">${content}</div>`
     );
     
-    document.open();
-    document.write(final);
-    document.close();    
+    document.getElementById("app").innerHTML = final;    
 
-    window.addEventListener("load", () => {
-      const currentPath = window.location.pathname;
-      document.querySelectorAll("a[href]").forEach(link => {
+    setTimeout(() => {
+        const currentPath = window.location.pathname;
+
+    document.querySelectorAll("a[href]").forEach(link => {
         const href = link.getAttribute("href");
-        if (!currentPath.includes(href)) {
-          link.setAttribute("href", "../" + href);
-        }
-      });
-    });
 
+      // if path dont have current folder name add ../
+            if (!currentPath.includes(href)) {
+                link.setAttribute("href", "../" + href);
+            }
+        });
+    }, 500);
     
     setTimeout(() => {
         const activeName = document.querySelector('meta[name="active-link"]')?.content?.trim();
