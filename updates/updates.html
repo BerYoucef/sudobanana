@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <link rel="icon" href="/sudobanana/imgs/favicon.png" type="image/png">
 </head>
-<template id="pageContent">
+<div id="app">
     <h1  class="page-title ">📢 Updates</h1>
     <div class="content-text">Latest changes, fresh content, and occasional banana drops 🍌</div>
 
@@ -29,7 +29,7 @@
         ~ Just Started the Journey ...📢 😎.  <br>
     </div>
 
-</template>
+</div>
 
 <script>
 (async () => {
@@ -52,7 +52,7 @@
         `<div class="page-content">${content}</div>`
     );
     
-    document.getElementById("pageContent").innerHTML = final;    
+    document.getElementById("app").innerHTML = final;    
 
     setTimeout(() => {
         const currentPath = window.location.pathname;
@@ -81,8 +81,3 @@
     }, 2000);
 })();
 </script>
-
-
-
-
-
