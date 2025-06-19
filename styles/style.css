@@ -536,6 +536,10 @@ body.light-theme .info-box::before {
     color: var(--jet-black);
 }
 
+body.light-theme .nav-item a:hover {
+    color: var(--jet-black);
+}
+
 body.light-theme .nav-item {
     background: var(--glow-yellow);
     color: var(--jet-black);
