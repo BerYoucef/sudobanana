@@ -56,15 +56,16 @@
     document.write(final);
     document.close();    
 
-    
-    const currentPath = window.location.pathname;
-    document.querySelectorAll("a[href]").forEach(link => {
-        const href = link.getAttribute("href"); 
+    window.addEventListener("load", () => {
+      const currentPath = window.location.pathname;
+      document.querySelectorAll("a[href]").forEach(link => {
+        const href = link.getAttribute("href");
         if (!currentPath.includes(href)) {
-        link.setAttribute("href", "../" + href);
+          link.setAttribute("href", "../" + href);
         }
+      });
     });
-     
+
     
     setTimeout(() => {
         const activeName = document.querySelector('meta[name="active-link"]')?.content?.trim();
