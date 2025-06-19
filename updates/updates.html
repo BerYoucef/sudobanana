@@ -70,3 +70,21 @@
     }, 2000);
 })();
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const depth = window.location.pathname.split("/").length - 2;
+    let prefix = "";
+    for (let i = 0; i < depth; i++) {
+      prefix += "../";
+    }
+
+    document.querySelectorAll("#sidebarsug a").forEach(link => {
+      const originalHref = link.getAttribute("href");
+      if (!originalHref.startsWith("http") && !originalHref.startsWith("/")) {
+        link.setAttribute("href", prefix + originalHref);
+      }
+    });
+  });
+</script>
+
+
