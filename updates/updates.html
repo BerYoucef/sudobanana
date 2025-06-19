@@ -72,19 +72,26 @@
 </script>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+    // if the page inside a folder (not in the root folder)
     const depth = window.location.pathname.split("/").length - 2;
-    let prefix = "";
-    for (let i = 0; i < depth; i++) {
-      prefix += "../";
+    if (depth > 0) {
+      document.querySelectorAll("a[href]").forEach(link => {
+        const href = link.getAttribute("href");
+        
+       // ignore external paths 
+        if (
+          !href.startsWith("http") &&
+          !href.startsWith("/") &&
+          !href.startsWith("../") &&
+          !href.startsWith("#")
+        ) {
+          link.setAttribute("href", "../" + href);
+        }
+      });
     }
-
-    document.querySelectorAll("#sidebarsug a").forEach(link => {
-      const originalHref = link.getAttribute("href");
-      if (!originalHref.startsWith("http") && !originalHref.startsWith("/")) {
-        link.setAttribute("href", prefix + originalHref);
-      }
-    });
   });
 </script>
+
+
 
 
