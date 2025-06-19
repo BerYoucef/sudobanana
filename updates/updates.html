@@ -53,20 +53,9 @@
         `<div class="page-content">${content}</div>`
     );
     
-    document.getElementById("app").innerHTML = final;    
-
-    setTimeout(() => {
-        const currentPath = window.location.pathname;
-
-    document.querySelectorAll("a[href]").forEach(link => {
-        const href = link.getAttribute("href");
-
-      // if path dont have current folder name add ../
-            if (!currentPath.includes(href)) {
-                link.setAttribute("href", "../" + href);
-            }
-        });
-    }, 500);
+    document.open();
+    document.write(final);
+    document.close();        
     
     setTimeout(() => {
         const activeName = document.querySelector('meta[name="active-link"]')?.content?.trim();
@@ -79,6 +68,6 @@
                 link.classList.add('active');
             }
         });
-    }, 2000);
+    }, 1000);
 })();
 </script>
