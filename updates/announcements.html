@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/sudobanana/imgs/favicon.png" type="image/png">
+</head>
+<template id="pageContent">
+    <h1  class="page-title ">📢 Announcements</h1>
+    <div class="content-text">Everything outside the 🍌 — updates, releases, and appearances.</div>
+
+    <h2 class="section-header">🔔 What is this page?</h2>
+    <div class="content-text"> 
+        This section is where I post general announcements: <br>
+        Not updates to this site itself — but things I publish somewhere else.<br>
+        It could be:<br>
+        ✍️ A blog post I wrote on another platform.<br>
+        🎥 A new video I published.<br>
+        🧠 A podcast appearance.<br>
+        🤝 A collaboration with another creator.<br>
+        📣 Any external feature or launch related to SudoBanana.<br>
+    </div>
+    
+    <h2 class="section-header">📅 Why keep this separate?</h2>
+    <div class="content-text">
+        Because this page isn’t for tracking new wiki entries. <br>
+        (That’s what the <a href="https://beryoucef.github.io/sudobanana/updates/updates.html">"📄 Updates"</a> section is for.).<br>
+        Instead, <a href="https://beryoucef.github.io/sudobanana/updates/announcements.html"></a>Announcements is where I share
+         what’s happening around the project,<br>
+        beyond the pages — things that might interest you 🔥, <br>
+        or help you follow SudoBanana 🍌 wherever it goes.<br>
+    </div>
+
+    <h2 class="section-header" >🧭 How to follow?</h2>
+    <div class="content-text" >
+        You can always check back here,
+        or follow the project on:
+        ~ <a href="https://github.com/BerYoucef/sudobanana">"GitHub"</a>
+        ~ <a href="https://x.com/SudoBanana7">"Twitter/X"</a>
+    </div>
+
+    <h2 class="section-header"></h2> 
+    <div class="content-text">
+        <b>Stay curious.</b>
+        The banana’s moving quietly… but it is moving. 🍌✨.
+    </div>
+
+</template>
+
+<script>
+(async () => {
+    // fetch template 
+    const res = await fetch('/sudobanana/template.html');
+    let template = await res.text();
+
+    // import page content into template
+    const content = document.getElementById('pageContent').innerHTML;
+
+    const myTitle = "Announcements | SudoBanana";
+    const active = "Announcements"
+    template = template
+        .replace('{{TITLE}}', myTitle)
+        .replace('{{ACTIVE_LINK}}', active);
+
+    // replace empty page content with real content
+    const final = template.replace(
+        '<div class="page-content"></div>',
+        `<div class="page-content">${content}</div>`
+    );
+    
+    document.open();
+    document.write(final);
+    document.close();    
+
+    setTimeout(() => {
+        const activeName = document.querySelector('meta[name="active-link"]')?.content?.trim();
+        if (!activeName) return;
+
+        const links = document.querySelectorAll('#sidebarsug a');
+        links.forEach(link => {
+            const text = link.textContent.trim();
+            if (text === activeName || text.includes(activeName)) {
+                link.classList.add('active');
+            }
+        });
+    }, 1000);
+})();
+</script>
