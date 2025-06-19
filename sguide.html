@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/sudobanana/imgs/favicon.png" type="image/png">
+</head>
+<template id="pageContent">
+    <h1  class="page-title ">📝 Style Guide</h1>
+    <div class="content-text">Because even chaos needs a structure. 🍌📏</div>
+
+    <h2 class="section-header">🎯 What This Page Is For: </h2>
+    <div class="content-text"> 
+        This guide explains how to write, format, and structure content on SudoBanana.<br>
+        Whether you're editing a typo or writing a full article,<br>
+        these guidelines will help keep everything clean, readable, and banana-friendly.<br>
+
+    </div>
+    
+    <h2 class="section-header" >🧠 The Tone </h2>
+    <div class="content-text" >
+        <strong>• Simple. Clear. Clean: </strong> <br>
+        Avoid jargon unless it's necessary — and if you use it, explain it. <br>
+
+        <strong>• Serious content, fun delivery. </strong> <br>
+        You can joke a little, but never compromise clarity or respect for the subject. <br>
+
+        <strong>• Think like a teacher, write like a friend.</strong> <br>
+        We're not here to show off. We're here to explain. <br>
+
+    </div>
+
+    <h2 class="section-header" >🍌 Emojis — Use Them Wisely</h2>
+    <div class="content-text" >
+        Yes, we use emojis — but not randomly. Use them to:<br>
+        📌 Emphasize key points.<br>
+        ⚠️ Warn about dangers (like deleting files or insecure settings).<br>
+        🧠 Mark conceptual ideas.<br>
+        🔧 Indicate tools.<br>
+        🧪 Mark examples/tests.<br>
+        😵💥 Represent errors or risks.<br>
+        🍌 Maintain the banana spirit (but not in every line).<br>
+        ✅ Don’t overuse them.<br>
+    </div>
+
+    <h2 class="section-header" >🏗️ Formatting Rules</h2>
+    <div class="content-text">
+        • Use markdown format (.md files).<br>
+        • Use # for headers. Keep them short and useful.<br>
+        • Use bullet points - for lists.<br>
+        • Use backticks ` ` for inline code.<br>
+        • Use triple backticks for code blocks.<br>
+        • Add language tag to code blocks (```js, ```bash, etc.).<br>
+    </div>
+
+    <h2 class="section-header" >📚 Article Structure Template</h2>
+    <div class="content-text">
+        Try to follow this basic outline for tutorials or vulnerability write-ups: <br>
+        <div class="code-block">
+            # 🧠 Topic Name (e.g. SSRF – Server-Side Request Forgery) <br>
+            <br>
+            ## 🔍 What is it? <br>
+            Brief explanation of the concept. <br>
+            <br>
+            ## ⚙️ How does it work? <br>
+            Detailed breakdown, maybe with a visual. <br>
+            <br>
+            ## 💥 Example <br>
+            A real-world or lab scenario, with code or screenshots. <br>
+            <br>
+            ## 🧪 Test it <br>
+            Explain how to reproduce or detect it. <br>
+            <br>
+            ## 🛡️ Mitigation or Defence <br>
+            How to fix or avoid the vulnerability. <br>
+            <br>
+            ## 🔧 Tools  <br>
+            Best Tools for this Vulnerability
+            <br>
+            ## 🧠 Notes <br>
+            Extra thoughts, weird cases, or related concepts. <br>
+        </div> <br>
+        and ofcourse You can add anything useful that i didn"t mention above 👍.
+
+    </div>
+        
+    <h2 class="section-header" >✍️ Language & Writing</h2>
+    <div class="content-text">
+        • Explain acronyms the first time (e.g. SSRF (Server-Side Request Forgery)). <br>
+        • Use analogies if helpful — but keep them accurate. <br>
+        • Don’t assume the reader knows everything. <br>
+        • Link to internal pages when needed. <br>
+
+    </div>
+
+    <h2 class="section-header" >🚫 Don’t Do This:</h2>
+    <div class="content-text">
+        ❌ Code without explanation. <br>
+        ❌ Overusing slang or memes. <br>
+        ❌ Copy-pasting content from other sources. <br>
+
+    </div>
+
+    <h2 class="section-header"></h2> 
+    <div class="content-text">
+        The goal isn’t to sound cool.. <br>
+        The goal is to <strong>make others understand what you understood</strong>. <br>
+    </div>
+
+</template>
+
+<script>
+(async () => {
+    // fetch template 
+    const res = await fetch('/sudobanana/template.html');
+    let template = await res.text();
+
+    // import page content into template
+    const content = document.getElementById('pageContent').innerHTML;
+
+    const myTitle = "Style Guide | SudoBanana";
+    const active = "Style Guide"
+    template = template
+        .replace('{{TITLE}}', myTitle)
+        .replace('{{ACTIVE_LINK}}', active);
+
+    // replace empty page content with real content
+    const final = template.replace(
+        '<div class="page-content"></div>',
+        `<div class="page-content">${content}</div>`
+    );
+    
+    document.open();
+    document.write(final);
+    document.close();    
+
+    setTimeout(() => {
+        const activeName = document.querySelector('meta[name="active-link"]')?.content?.trim();
+        if (!activeName) return;
+
+        const links = document.querySelectorAll('#sidebarsug a');
+        links.forEach(link => {
+            const text = link.textContent.trim();
+            if (text === activeName || text.includes(activeName)) {
+                link.classList.add('active');
+            }
+        });
+    }, 2000);
+})();
+</script>
