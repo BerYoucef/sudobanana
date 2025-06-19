@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/sudobanana/imgs/favicon.png" type="image/png">
+</head>
+<template id="pageContent">
+    <h1  class="page-title ">📢 Updates</h1>
+    <div class="content-text">Latest changes, fresh content, and occasional banana drops 🍌</div>
+
+
+    <h5 class="section-header">Thu Jun 19 2025 5 AM </h5>
+    <div class="content-text"> 
+        ~ Added Roadmap Page
+        ~ Added Philosophy Page
+        ~ Added Updates Page
+    </div>
+
+
+    <h5 class="section-header">Wed Jun 18 2025 20 PM </h5>
+    <div class="content-text"> 
+        ~ Added Welcome Page
+        ~ Added About The Author Page
+        ~ Added How to use the wiki Page       
+    </div>
+
+
+    <h5 class="section-header">Tue Jun 17 2025 10 AM </h5>
+    <div class="content-text"> 
+        Just Started the Journey ...📢 😎
+    </div>
+
+</template>
+
+<script>
+(async () => {
+    // fetch template 
+    const res = await fetch('/sudobanana/template.html');
+    let template = await res.text();
+
+    // import page content into template
+    const content = document.getElementById('pageContent').innerHTML;
+
+    const myTitle = "Updates | SudoBanana";
+    const active = "Updates"
+    template = template
+        .replace('{{TITLE}}', myTitle)
+        .replace('{{ACTIVE_LINK}}', active);
+
+    // replace empty page content with real content
+    const final = template.replace(
+        '<div class="page-content"></div>',
+        `<div class="page-content">${content}</div>`
+    );
+    
+    document.open();
+    document.write(final);
+    document.close();    
+
+    setTimeout(() => {
+        const activeName = document.querySelector('meta[name="active-link"]')?.content?.trim();
+        if (!activeName) return;
+
+        const links = document.querySelectorAll('#sidebarsug a');
+        links.forEach(link => {
+            const text = link.textContent.trim();
+            if (text === activeName || text.includes(activeName)) {
+                link.classList.add('active');
+            }
+        });
+    }, 2000);
+})();
+</script>
