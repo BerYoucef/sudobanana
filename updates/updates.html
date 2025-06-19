@@ -74,11 +74,16 @@
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("a").forEach(link => {
-      const href = link.getAttribute("href");
-      link.setAttribute("href", "../" + href);
+      link.addEventListener("click", function (e) {
+        e.preventDefault(); 
+        const href = link.getAttribute("href");
+        
+        window.location.href = "../" + href;
+      });
     });
   });
 </script>
+
 
 
 
