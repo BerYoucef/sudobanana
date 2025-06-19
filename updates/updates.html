@@ -28,10 +28,12 @@
 </template>
 
 <script>
+// Define the function before using it
 function adjustLinkPaths() {
     const currentPath = window.location.pathname;
     const currentDir = currentPath.substring(0, currentPath.lastIndexOf('/'));
     
+    // Handle GitHub Pages paths
     const basePath = '/sudobanana';
     const relativePath = currentPath.replace(basePath, '') || '/';
     
@@ -44,16 +46,19 @@ function adjustLinkPaths() {
     links.forEach(link => {
         const href = link.getAttribute('href');
         
+        // Ignore external, special, and already adjusted links
         if (!href || 
             href.startsWith('http') || 
             href.startsWith('//') || 
             href.startsWith('#') || 
             href.startsWith('mailto:') || 
             href.startsWith('tel:') ||
-            href.includes('../')) {
+            href.includes('../') ||
+            link.hasAttribute('data-adjusted')) { // Check for already adjusted links
             return;
         }
         
+        // Handle absolute links that start with /sudobanana
         if (href.startsWith('/sudobanana/')) {
             const linkWithoutBase = href.replace('/sudobanana/', '');
             const linkParts = linkWithoutBase.split('/').filter(part => part !== '');
@@ -64,12 +69,19 @@ function adjustLinkPaths() {
             const currentDirParts = relativePath.split('/').filter(part => part !== '');
             const currentDirName = currentDirParts[currentDirParts.length - 1];
             
-            if (linkFirstDir !== currentDirName && currentDirName) {
+            // If the folder is different and not the same current page
+            if (linkFirstDir !== currentDirName && currentDirName && linkWithoutBase !== relativePath.substring(1)) {
                 const newHref = '../' + linkWithoutBase;
                 link.setAttribute('href', newHref);
+                link.setAttribute('data-adjusted', 'true'); // Mark as adjusted
                 console.log(`✅ Modified: ${href} → ${newHref}`);
             }
+            // If it's the same page, don't modify the link
+            else if (linkWithoutBase === relativePath.substring(1)) {
+                console.log(`🔄 Same page link, skipping: ${href}`);
+            }
         }
+        // Handle regular absolute links starting with /
         else if (href.startsWith('/')) {
             const linkParts = href.split('/').filter(part => part !== '');
             if (linkParts.length === 0) return;
@@ -81,9 +93,11 @@ function adjustLinkPaths() {
             if (linkFirstDir !== currentDirName && currentDirName) {
                 const newHref = '../' + href.substring(1);
                 link.setAttribute('href', newHref);
+                link.setAttribute('data-adjusted', 'true'); // Mark as adjusted
                 console.log(`✅ Modified: ${href} → ${newHref}`);
             }
         }
+        // Handle simple relative links
         else if (!href.startsWith('./') && !href.includes('/')) {
             const currentDirParts = currentDir.split('/').filter(part => part !== '');
             const currentDirName = currentDirParts[currentDirParts.length - 1];
@@ -91,6 +105,7 @@ function adjustLinkPaths() {
             if (currentDirName) {
                 const newHref = '../' + href;
                 link.setAttribute('href', newHref);
+                link.setAttribute('data-adjusted', 'true'); // Mark as adjusted
                 console.log(`✅ Modified relative: ${href} → ${newHref}`);
             }
         }
@@ -99,13 +114,13 @@ function adjustLinkPaths() {
 
 (async () => {
     try {
-        // fetch template 
+        // Fetch template 
         const res = await fetch('/sudobanana/template.html');
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         
         let template = await res.text();
 
-        // import page content into template
+        // Import page content into template
         const content = document.getElementById('pageContent').innerHTML;
 
         const myTitle = "Updates | SudoBanana";
@@ -115,7 +130,7 @@ function adjustLinkPaths() {
             .replace('{{TITLE}}', myTitle)
             .replace('{{ACTIVE_LINK}}', active);
 
-        // replace empty page content with real content
+        // Replace empty page content with real content
         const final = template.replace(
             '<div class="page-content"></div>',
             `<div class="page-content">${content}</div>`
@@ -125,7 +140,9 @@ function adjustLinkPaths() {
         document.write(final);
         document.close();    
         
+        // Delay to ensure content is loaded
         setTimeout(() => {
+            // Manage active links
             const activeName = document.querySelector('meta[name="active-link"]')?.content?.trim();
             if (activeName) {
                 const links = document.querySelectorAll('#sidebarsug a');
@@ -137,6 +154,7 @@ function adjustLinkPaths() {
                 });
             }
             
+            // Adjust link paths
             adjustLinkPaths();
             
         }, 2000);
