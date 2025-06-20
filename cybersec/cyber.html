@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/sudobanana/imgs/favicon.png" type="image/png">
+    <meta name="keywords" content="CyberSec, CyberSecurity, cybersec, cybersecurity, Cyber Sec, 
+        Cyber Security, cyber sec, cyber security, information security, infosec, info sec, 
+        Information Security, InfoSec, Info Sec, info security, Info Security, King, king">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="explanation for the cybersecurity and information security with a short story">
+</head>
+<template id="pageContent">
+    <h1  class="page-title ">What is Cyber Security ? 🛡️</h1>
+    <div class="content-text">If you think cybersecurity is just for IT guys, think again. This is about you. 💡</div>
+
+    <h2 class="section-header">The Banana-Eating King & the Art of Cybersecurity 🍌👑💻</h2>
+    <div class="content-text"> 
+        🕰️ Back in the day — let’s say 1000 years ago... <br>
+        A king  👑 (let's keep him unnamed) and he wants to send a <strong>secret msg</strong> 📜 to someone important , and 
+        because he is a king he would never send his secret msg with anyone he just found in front of him.<br>
+        Yup, The King did it ... or let's say if he want. <br>
+        <br>
+        👑 <strong>king</strong>: Hey, commoner . <br>
+        🧍‍♂️ <strong>Commoner</strong> : Yes , King ? <br>
+        👑 <strong>king</strong>: that's a secret msg and I want you to take it to Dr.alva <br>
+        🧍‍♂️ <strong>Commoner</strong>: ...Okay. (Who is Dr. Alva anyway? 😅) <br>
+        <br>
+        At this moment, we can notice <strong>three serious problems</strong> ⚠️: <br>
+        <br>
+        1️⃣ <strong>Trust</strong> 🕵️‍♂️ <br>
+        The king doesn't trust the commoner. meaning the Commoner isn't a trusted source. <br>
+        👉 He might <strong>read the msg</strong> before it reaches its destination. <br>
+        <br>
+        2️⃣ <strong>Protection</strong> 🛡️ <br>
+        The Commoner has <strong>no means and no power</strong> to defend the msg. <br>
+        👉 He can find or <strong>attacked by thieves</strong> in his way (msg gone). <br>
+        <br> 
+        3️⃣ <strong>Loyalty</strong> 🤷‍♂️ <br>
+        The Commoner might not be <strong>loyal</strong> to the king , <br>
+        👉 he could simply <strong>run away</strong> with the msg without delivering it.<br>
+
+        The king 👑 knows all these problems because he is a king with basic 
+        knowledge of <strong>information security</strong> 🔐 . <br>
+        he sends his secret msg with a group that he trusts. He plans for their <strong>departure time</strong>,
+        chooses the <strong>safest route</strong>, and of course He <strong>encrypts</strong> 🔐 the
+         msg using (really basic ) cipher. <br>
+        right now the king is resting in his room <strong>(enjoying some bananas 🍌)</strong> feeling 90%
+         sure the group will return safely.  <br>
+        Why ? because they don't have the same weaknesses the commoner had . <br>
+        <strong>Trust ?</strong> They have it ✅ , <strong>Power ?</strong> They are 
+        armored group 💪, <strong>Loyalty ?</strong> Absolutely 🫡. <br>
+
+        And that's exactly what Cyber Security / Information Security  is all about 🎯 . <br>
+        We use <strong>internet</strong> 🌐 every single moment , sending thousands of digital messages 
+        [named <strong>packets</strong> 📦 in Networking] from you (<strong>client</strong>👤) to website
+         (<strong>Server</strong> 🖥️). <br>
+
+        If we don’t protect those packets: <br>
+        ❌ <strong>Hackers</strong> 🕵️‍♂️🧨 might intercept them, read them, or even stop them from 
+        reaching their destination. <br>
+        <br>
+        Cybersecurity is how we: <br>
+        🔐 Encrypt messages <br>
+        ✅ Control who can access data <br>
+        🛡️ Defend systems from attacks <br>
+        <br>
+        💡 Just remember:  <br>
+        🔐 Information Security = Protecting any kind of data (paper, files, USBs...) <br>
+        💻 Cybersecurity = Focused on protecting digital data — like your packets, emails, and passwords. <br>
+        ~ You can check the full difference between CyberSecurity and Information Security 
+           <a href="https://beryoucef.github.io/sudobanana/cybersec/cybers-vs-infos.html">"Here"</a> <br>
+
+    </div>
+    
+    <h2 class="section-header"></h2> 
+    <div class="content-text">
+        🗣️ I talked a lot, but I hope the message got through... securely 😉.
+    </div>
+
+</template>
+
+<script>
+(async () => {
+    // fetch template 
+    const res = await fetch('/sudobanana/template.html');
+    let template = await res.text();
+
+    // import page content into template
+    const content = document.getElementById('pageContent').innerHTML;
+
+    const myTitle = "What is CyberSec | SudoBanana";
+    const active = "What is CyberSec ?"
+    template = template
+        .replace('{{TITLE}}', myTitle)
+        .replace('{{ACTIVE_LINK}}', active);
+
+    // replace empty page content with real content
+    const final = template.replace(
+        '<div class="page-content"></div>',
+        `<div class="page-content">${content}</div>`
+    );
+    
+    document.open();
+    document.write(final);
+    document.close();    
+
+    setTimeout(() => {
+        const activeName = document.querySelector('meta[name="active-link"]')?.content?.trim();
+        if (!activeName) return;
+
+        const links = document.querySelectorAll('#sidebarsug a');
+        links.forEach(link => {
+            const text = link.textContent.trim();
+            if (text === activeName || text.includes(activeName)) {
+                link.classList.add('active');
+            }
+        });
+    }, 2000);
+})();
+</script>
