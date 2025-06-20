@@ -203,6 +203,23 @@ body.light-theme .nav-link:hover {
     padding-bottom: 50px;
 }
 
+.submenu {
+display: none;
+padding-left: 15px;
+}
+.has-submenu.open .submenu {
+display: block;
+}
+.has-submenu .arrow {
+display: inline-block;
+transition: transform 0.3s ease;
+margin-right: 6px;
+}
+
+.has-submenu.open .arrow {
+transform: rotate(90deg);
+}
+
 .sidebar::-webkit-scrollbar {
     width: 8px;
 }
