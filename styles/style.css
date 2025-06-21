@@ -739,14 +739,14 @@ body.light-theme #suggestions {
 }
 
 .img-box {
-  background-color: #000;         
-  border: 4px solid yellow;        
-  padding: 8px;                   
-  display: inline-block;
-  border-radius: 10px;             
-  max-width: 600px;                
-  max-height: 400px;                
-  overflow: hidden;               
+    background-color: #000;         
+    border: 4px solid var(--banana-yellow);        
+    padding: 2px;  
+    display: inline-block;
+    border-radius: 10px;             
+    max-width: 600px;                
+    max-height: 300px;                
+    overflow: hidden;               
 }
 
 .img-box img {
@@ -755,4 +755,13 @@ body.light-theme #suggestions {
   display: block;
 }
 
-
+body.light-theme .img-box {
+    background-color: #000;         
+    border: 4px solid var(--jet-black);        
+    padding: 2px;  
+    display: inline-block;
+    border-radius: 10px;             
+    max-width: 600px;                
+    max-height: 300px;                
+    overflow: hidden;   
+}
