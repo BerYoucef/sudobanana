@@ -749,21 +749,40 @@ body.light-theme #suggestions {
     overflow: hidden;               
 }
 
-.img-box img {
-  width: 590px;             
-  height: 280px;           
-  object-fit: cover;         
-  display: block;
+.img-box {
+  background-color: #000;                  
+  border: 3px solid var(--banana-yellow);   
+  border-radius: 12px;                       
+  padding: 6px;                         
+  display: inline-block;                     
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  max-width: 600px;                       
+  overflow: hidden;                          
+  transition: transform 0.3s ease-in-out;  
 }
 
+.img-box:hover {
+  transform: scale(1.02);                 
+}
+
+.img-box img {
+  width: 100%;
+  height: auto;           
+  display: block;         
+  border-radius: 8px; 
+  object-fit: cover;     
+}
+
+
 body.light-theme .img-box {
-    background-color: #000;         
-    border: 4px solid var(--jet-black);        
-    padding: 2px;  
-    display: inline-block;
-    border-radius: 10px;             
-    max-width: 600px;                
-    max-height: 320px;                
-    overflow: hidden;   
+ background-color: #000;                  
+  border: 3px solid var(--jet-black);   
+  border-radius: 12px;                       
+  padding: 6px;                         
+  display: inline-block;                     
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  max-width: 600px;                       
+  overflow: hidden;                          
+  transition: transform 0.3s ease-in-out;  
 }
 
