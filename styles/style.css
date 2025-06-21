@@ -750,8 +750,9 @@ body.light-theme #suggestions {
 }
 
 .img-box img {
-  width: 99%;             
-  height: 99%;                  
+  width: 590px;             
+  height: 280px;           
+  object-fit: cover;         
   display: block;
 }
 
@@ -765,3 +766,4 @@ body.light-theme .img-box {
     max-height: 320px;                
     overflow: hidden;   
 }
+
