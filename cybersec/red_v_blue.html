@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/sudobanana/imgs/favicon.png" type="image/png">
+    <meta name="keywords" content="CyberSec, CyberSecurity, cybersec, cybersecurity, Cyber Sec, 
+        Cyber Security, cyber sec, cyber security, information security, infosec, info sec, 
+        Information Security, InfoSec, Info Sec, info security, Info Security, King, king">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="explanation for the difference between Red Team and Blue Team">
+</head>
+<template id="pageContent">
+    <h1  class="page-title ">🔴 Red Team vs 🔵 Blue Team</h1>
+    <div class="content-text">Now seriously...??</div>
+
+    <h2 class="section-header">CyberSecurity Domains</h2>
+    <div class="content-text"> 
+        Cybersecurity is all about protecting digital data, and there are two main paths to reach that goal : <br>
+        🛡️ <strong>Defensive Security</strong> and 💣 <strong>Offensive Security</strong>.<br>
+        Both of them are trying to protect you but in different ways. Here's how 👇: <br>
+        Cybersecurity guy who use offensive security will protect you <strong>by hacking you </strong> (okay don't worry, 
+        he's ethical hacker 👨‍💻, totally legit ✅), then he'll tell you what's the weaknesses that he found 
+        in your system and how to protect it with best practises. <br>
+        On the other hand, the guy who works at Defensive Security, 
+        he'll protect you too but in a different way which is building 
+        protecting system, monitoring systems, logging, and using many other defensive techniques to keep you safe🔐.
+        You might notice that i didn't mention or use "Red Team" or "Blue Team" I have said "Offensive Security" 
+        and "Defensive Security", Why? Here's why 👇: <br>
+        If you just started to study cybersecurity and you have learned 
+        networking basics, programming basics, and OS basics. 
+        You'll reach a point that you need to choose what you gonna be expert at in cybersecurity like for example: <br>
+        I want to be a pentester, a soc analyst, a bughunter, a security engineer or work on the Red Team, <br> 
+        Because Red Team is a career path in cybersecurity.  <br> 
+        About "Blue Team" there is something named "Blue Team" but it's not a specific career like Red Team, 
+        it's more like an umbrella term 🌂 that covers multiple careers in defensive security. Actually, 
+        Blue Team Is defensive security (same thing, different name)." <br>
+        Think of it like this: when someone says "I work in Blue Team" it's like saying "I work in healthcare" - 
+        but are you a doctor? nurse? surgeon? pharmacist? 🤔 <br>
+        In Blue Team (defensive security) we have many specific careers like: <br>
+        SOC Analyst 👀 (the guy who monitors security alerts 24/7). <br>
+        Incident Response Specialist 🚨 (the guy who handles security breaches). <br>
+        Digital Forensics Expert 🔍 (the guy who investigates what happened after an attack). <br>
+        Security Engineer 🛠️ (the guy who builds and maintains security systems). <br>
+        Threat Hunter 🎯 (the guy who actively searches for hidden threats). <br>
+        ...and many more. <br>
+
+        When someone says "I wanna work in Blue Team", ask him: "Cool! But which specific role in Blue Team? 🤨"<br>
+    </div>
+    <div class="img-box">
+        <img src="https://raw.githubusercontent.com/BerYoucef/sudobanana/refs/heads/main/imgs/Red_v_Blue_Team.png" alt="Red_v_Blue_Team.png">
+    </div>
+    <h2 class="section-header">⚽ Let’s Be Real...</h2>
+    <div class="content-text">
+        Now people who say "Red Team vs Blue Team — which one is better" Seriously?🤦‍♂️<br>
+        it seems like you are comparing a football club to a football player,<br>
+        One is a whole domain, the other is a role within the opposite domain.<br>
+        Its just not fair.<br>
+    </div>
+    <div class="info-box">
+        <strong>Did you know?</strong> that U.S.A. was using these terms Blue Team and Red Team in world war 2 ? <br>
+        in its Military training, where the Blue Team try to defend and protect the area they are holding and the 
+        Red Team try to get into this area via Blue Team weaknesses.<br>
+        Yep — this isn’t just a nerd thing, it’s military-grade nerd stuff 🪖😎<br>
+    </div>
+    <h2 class="section-header">🧠 Final Words:</h2>
+    <div class="content-text">
+        The next time someone says:<br>
+        "I wanna work in Red Team but don’t know what career to pick..."<br>
+        📚 Load him up with knowledge — before he gets pwned 🗿.<br>
+    </div>
+    <h2 class="section-header"></h2> 
+    <div class="content-text">
+        🚨 Security Alert: <br>
+        If you say you wanna join the Red Team but don’t know the difference between SOC and socks... <br>
+        📚 Go back to study, champ 😅 <br>
+    </div>
+
+</template>
+
+<script>
+(async () => {
+    // fetch template 
+    const res = await fetch('/sudobanana/template.html');
+    let template = await res.text();
+
+    // import page content into template
+    const content = document.getElementById('pageContent').innerHTML;
+
+    const myTitle = "The difference between Red Team and Blue Team | SudoBanana";
+    const active = "Red Team VS Blue Team"
+    template = template
+        .replace('{{TITLE}}', myTitle)
+        .replace('{{ACTIVE_LINK}}', active);
+
+    // replace empty page content with real content
+    const final = template.replace(
+        '<div class="page-content"></div>',
+        `<div class="page-content">${content}</div>`
+    );
+    
+    document.open();
+    document.write(final);
+    document.close();    
+
+    setTimeout(() => {
+        const activeName = document.querySelector('meta[name="active-link"]')?.content?.trim();
+        if (!activeName) return;
+
+        const links = document.querySelectorAll('#sidebarsug a');
+        links.forEach(link => {
+            const text = link.textContent.trim();
+            if (text === activeName || text.includes(activeName)) {
+                link.classList.add('active');
+            }
+        });
+    }, 2000);
+})();
+</script>
